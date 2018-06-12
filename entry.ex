@@ -1,6 +1,6 @@
 defmodule Entry do
   def main do
-    do_tuples()
+    do_lists()
   end
 
   def figure_out_stuff do
@@ -30,7 +30,7 @@ defmodule Entry do
   def do_tuples do
     my_stats = {175, 6.25, :Karan}
 
-    IO.puts "Tuyple #{s_tuple(my_stats)}"
+    IO.puts "Tuple #{is_tuple(my_stats)}"
 
     my_stats2 = Tuple.append(my_stats, 42)
 
@@ -47,4 +47,42 @@ defmodule Entry do
 
     IO.puts "Weight: #{weight}"
   end
+
+  def do_lists do
+    list1 = [1,2,3]
+    list2 = [4,5,6]
+
+    list3 = list1 ++ list2
+
+    list4 = list3 -- list1
+
+    IO.puts 6 in list4
+
+    [head | tail] = list3
+    IO.puts "Head : #{head}"
+    IO.write "Tail : "
+    IO.inspect tail
+
+    Enum.each tail, fn item ->
+      IO.puts item
+    end
+
+    words = ["Random", "Words", "In a", "list"]
+    Enum.each words, fn word ->
+      IO.puts word
+    end
+
+    display_list(words)
+  end
+
+  def display_list([word|words]) do
+    IO.puts word
+    display_list(words)
+  end
+
+  def display_list([]), do: nil
+end
+
+def do_maps do
+
 end
