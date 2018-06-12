@@ -1,6 +1,6 @@
 defmodule Entry do
   def main do
-    do_lists()
+    do_maps()
   end
 
   def figure_out_stuff do
@@ -81,8 +81,17 @@ defmodule Entry do
   end
 
   def display_list([]), do: nil
-end
 
-def do_maps do
+  def do_maps do
+    capitals = %{"Alabama" => "Montgomery", "Alaska" => "Juno", "Arizona" => "Phoenix"}
+
+     IO.puts "Capital of Alaska is #{capitals["Alaska"]}"
+
+     capitals2 = %{alabama: "Montgomery", alaska: "Juno", arizona: "Phoenix"}
+
+     IO.puts "Capital of Arizona is #{capitals2.arizona}"
+
+     capitals3 = Dict.put_new(capitals, "Arkansas", "Little Rock")
+  end
 
 end
