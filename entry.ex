@@ -1,6 +1,6 @@
 defmodule Entry do
   def main do
-    do_maps()
+    concurrency()
   end
 
   def figure_out_stuff do
@@ -92,6 +92,60 @@ defmodule Entry do
      IO.puts "Capital of Arizona is #{capitals2.arizona}"
 
      capitals3 = Dict.put_new(capitals, "Arkansas", "Little Rock")
+  end
+
+  def anon_func do
+    get_sum = fn (x, y) -> x + y end
+
+    IO.puts " 5 + 5 = #{get_sum.(5,5)}"
+
+    #short hand?
+    get_less = &(&1 - &2)
+
+    IO.puts "7 - 6 = #{get_less.(7,6)}"
+
+    add_sum = fn
+      {x, y} -> IO.puts "#{x} + #{y} = #{x + y}"
+    end
+
+    add_sum.({1,2})
+  end
+
+  def concurrency do
+    spawn(fn() -> loop(1, 50) end)
+    spawn(fn() -> loop(23, 38) end)
+
+    send(self(), {:french, "Bob"})
+
+    receive do
+      {:german, name} -> IO.puts "Guten tag #{name}"
+      {:french, name} -> IO.puts "Bonjour #{name}"
+      {:english, name} -> IO.puts "Hello #{name}"
+
+    after
+      500 -> IO.puts "Time up"
+    end
+  end
+
+  def end_loop, do: nil
+
+  def loop(min, max) do
+    if min > max do
+      end_loop()
+    else
+      IO.puts "Num: #{min}"
+      loop(min + 1, max)
+    end
+  end
+
+  def catch_error do
+    err = try do
+      5 / 0
+    rescue
+      ArithmeticError -> "Cant divide by 0"
+    end
+
+    IO.puts err
   end
 
 end
